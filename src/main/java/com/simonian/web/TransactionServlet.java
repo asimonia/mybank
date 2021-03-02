@@ -1,9 +1,11 @@
 package com.simonian.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.simonian.context.Application;
+import com.simonian.context.ApplicationConfiguration;
 import com.simonian.model.Transaction;
 import com.simonian.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +17,17 @@ import java.util.List;
 
 public class TransactionServlet extends HttpServlet {
 
-    private final TransactionService transactionService = Application.transactionService;
-    private final ObjectMapper objectMapper = Application.objectMapper;
+
+    private TransactionService transactionService;
+    private ObjectMapper objectMapper;
+
+    @Override
+    public void init() throws ServletException {
+        AnnotationConfigApplicationContext ctx
+                = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        this.transactionService = ctx.getBean(TransactionService.class);
+        this.objectMapper = ctx.getBean(ObjectMapper.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

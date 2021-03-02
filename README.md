@@ -4,6 +4,9 @@
 - org.apache.tomcat.embed - embedded tomcat
 - com.fasterxml.jackson.core - serves JSON
 - maven shade plugin to create manifest and package 3rd party libaries in fat JAR
+- spring-context - DI container for ApplicationContext
+- javax.annotation-api - annotations for pre and post bean construct 
+
 
 #### Application notes
 1. Application launcher runs the embedded tomcat, opens up a port, adds the servlet and starts to listen to HTTP requests
