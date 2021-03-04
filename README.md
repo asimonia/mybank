@@ -69,3 +69,49 @@ You can specify profiles for different loading environments (qa, dev, prod)
 You can activate them with:
 VM Option: -Dspring.profiles.active=dev
 https://www.baeldung.com/spring-profiles#2-using-springactiveprofile
+
+////////////////////////////////////////////////
+Spring MVC’s own servlet, called DispatcherServlet, comes bundled with Spring MVC.  It takes invoicing requests and forwards to the proper controller by URI
+
+@RestController → @Controller + @ResponseBody
+
+@GetMapping
+@PutMapping
+@PostMapping
+@DeleteMapping
+
+@RequestParam → http://localhost:8080/invoices?user_id=franz&amount=50
+@PathVariable → http://localhost:8080/invoices/franz/50
+@RequestBody *application/json* in the content-type for POST requests
+
+@EnableWebMVC
+Looks at classpath. And if it finds the JSON library, it automatically creates a Spring JSON converter. If it finds an XML library, it automatically creates an XML converter.
+This means your application now has two converters (XML and JSON) and they have a certain order with different priorities.
+The XML converter has a higher default priority, that is why you are now receiving XML, instead of JSON.
+
+Content negotation. Spring understands what data format you send in and what you expect as a result, by looking at HTTP headers.
+
+////////////////////////////////////////////////
+
+Hibernate has a server side validation API for incoming requests.  
+
+@Valid tells Spring to actually perform this validation
+
+@Validated tells Spring that the controller is validated
+
+@AssertFalse / @AssertTrue → makes sure that a boolean field is set to false / true.
+@DecimalMin / @DecimalMax → makes sure that a number (BigDecimal, BigInteger, CharSequence, byte, short, int, long etc.) is >= or ⇐ a value. It’s an equivalent of @Min, @Max you used above.
+@Digits
+@Email → the string needs to be a well-formed e-mail address
+@Future / @FutureOrPresent → a date (pre Java 8 types and Java8+ types) needs to be in the future or present
+@Min / @Max → same as DecimalMin / DecimalMax
+@Negative / @NegativeOrZero → self-explanatory
+@NotBlank / @NotEmpty → a string must not be blank or empty
+@Null / @NotNull → self-explanatory
+@Past / @PastOrPresent → a date (pre Java 8 types and Java8+ types) needs to be in the future or present
+@Pattern → a string needs to match a regex pattern
+@Positive / @PositiveOrZero → self-explanatory
+@Size → the element size must be between a boundary. valid for strings, collections, maps, arrays.
+
+
+@RestControllerAdvice - returns JSON with a HTTP 400 or 500 status codes
