@@ -1,5 +1,7 @@
 package com.simonian.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -11,6 +13,10 @@ public class TransactionDTO {
 
     @NotBlank
     private String reference;
+
+    @NotBlank
+    @JsonProperty("receiving_user")
+    private String receivingUser;
 
     public BigDecimal getAmount() {
         return amount;
@@ -26,5 +32,13 @@ public class TransactionDTO {
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public String getReceivingUser() {
+        return receivingUser;
+    }
+
+    public void setReceivingUser(String receivingUser) {
+        this.receivingUser = receivingUser;
     }
 }

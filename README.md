@@ -115,3 +115,30 @@ Hibernate has a server side validation API for incoming requests.
 
 
 @RestControllerAdvice - returns JSON with a HTTP 400 or 500 status codes
+
+/////////////////////////////////////////////////
+
+To connect to a database with Java and Spring, you need two things:
+
+- database
+- JDBC driver
+- DataSource config bean
+
+DataSource is the interface that is implemented by a vendor to connect and manage those connections to the database
+
+You can also place your sql scripts in a directory to create the schema.
+spring-jdbc is one of the oldest available core Spring framework modules, and a tiny wrapper around plain JDBC
+
+JDBCTemplate is the low level Spring way of executing queries
+
+
+
+
+to enable transaction management:
+
+@EnableTransactionManagement
+
+@Bean
+public TransactionManager platformTransactionManager() {
+    return new DataSourceTransactionManager(dataSource());
+}
